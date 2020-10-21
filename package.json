@@ -1,0 +1,24 @@
+{
+  "name": "local-library",
+  "author":"Alex Arobelidze",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "devstart":"nodemon ./bin/www -e js,mjs,json,hbs"
+  },
+  "dependencies": {
+    "async": "^3.2.0",
+    "cookie-parser": "^1.4.5",
+    "debug": "^2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.4",
+    "hbs": "^4.1.1",
+    "http-errors": "^1.6.3",
+    "mongoose": "^5.10.9",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
