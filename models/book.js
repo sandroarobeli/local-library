@@ -8,7 +8,7 @@ const bookSchema = new mongoose.Schema({
         required: true
     },
     author: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Author',
         required: true
     },
@@ -21,7 +21,7 @@ const bookSchema = new mongoose.Schema({
         required: true
     },
     genre: [{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Genre'
     }]
 })

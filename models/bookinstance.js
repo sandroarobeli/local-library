@@ -1,10 +1,10 @@
-const mongoose = required('mongoose')
+const mongoose = require('mongoose')
 
 
 // BookInstance Schema
 const bookInstanceSchema = new mongoose.Schema({
     book: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Book',
         required: true                                          
     },
@@ -28,7 +28,7 @@ bookInstanceSchema
     .virtual('url')
     .get(function() {
         const bookInstance = this
-        return '/catalog/bookinstance/' + BookInstance._id
+        return '/catalog/bookinstance/' + bookInstance._id
     })
 // Compiled BookInstance Class
 const BookInstance = mongoose.model('BookInstance', bookInstanceSchema)
