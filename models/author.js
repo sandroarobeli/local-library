@@ -21,14 +21,22 @@ authorSchema
     .virtual('name')
     .get(function() {
         const author = this
-        return author.first_name + ' ' + author.family_name
+        if (author.first_name && author.family_name) {
+            return author.first_name + ' ' + author.family_name
+        }
+        if (!author.first_name || !author.family_name) {
+            return ""
+        }
     })
 // Virtual property for author's lifespan
 authorSchema
     .virtual('lifespan')
     .get(function () {
         const author = this
-        return (author.date_of_death.getYear() - author.date_of_birth.getYear()).toString()
+        if (author.date_of_death) {
+            return (author.date_of_death.getFullYear() - author.date_of_birth.getFullYear()).toString()
+        }
+        return "Still alive"
     })
 // Virtual property for generating author's URL
 authorSchema
