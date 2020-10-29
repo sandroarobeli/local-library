@@ -3,7 +3,6 @@ const express = require('express')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const hbs = require('hbs')
 require('./db/mongoose')
 
 
@@ -13,9 +12,12 @@ const catalogRouter = require('./routes/catalog')
 
 const app = express();
 
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
