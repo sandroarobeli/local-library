@@ -1,13 +1,30 @@
 const Genre = require('../models/genre');
-
+const Book = require('../models/book')
 
 // Display list of all Genre.
-exports.genre_list = (req, res) => {
-    res.send('Genre list');
+exports.genre_list = async (req, res, next) => {
+    try {
+        const genres = await Genre.find({}).sort({name:'ascending'})
+        res.render('genre_list', {title: 'Genre List', genres})
+    } catch (error) {
+        return next(error)
+    }
 };
 // Display detail page for a specific Genre.
-exports.genre_detail = (req, res) => {
-    res.send('Genre detail: ' + req.params.id);
+exports.genre_detail = async (req, res, next) => {
+    try {
+        const genre = Genre.findById(req.params.id)
+        const genre_books = Book.find({genre: req.params.id})
+        const results = await Promise.all([genre, genre_books])
+        res.render('genre_detail', {title: 'Genre Detail', genre: results[0].length === 0 ? 'Genre not found' : results[0], genre_books: results[1] })
+    } catch (error) {
+        if (error) {
+            return next(error)
+        }
+        if (results[0] === null) {
+            return next(new Error('Genre not found'))
+        }
+    }
 };
 // Display Genre create form on GET.
 exports.genre_create_get = (req, res) => {
